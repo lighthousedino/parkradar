@@ -1,10 +1,10 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+# from django.http import HttpResponse
 
 
 # Create your views here.
 
-def index(request):
+def home(request):
     context = {}
     return render(request, 'parking/home.html', context)
 

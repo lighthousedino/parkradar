@@ -1,3 +1,9 @@
-body{
-    background-color: gray;
+::-webkit-scrollbar {
+    display: none;
 }
+
+#nav-tabs {
+    position: absolute;
+    bottom: -25px;
+    width: 100%;
+ }

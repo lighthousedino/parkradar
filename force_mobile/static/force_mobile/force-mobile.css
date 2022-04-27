@@ -1,17 +1,18 @@
 body{
     background-color: black;
-    overflow-y: hidden;
+}
+
+::-webkit-scrollbar {
+    display: none;
 }
 
 .force-mobile {
-    width: 750px;
-    max-width: 750px;
-    height: 1334px;
-    margin: 0 auto;
-    border-style: none;
-    border-color: inherit;
-    border-width: 0px;
-    -webkit-transform: scale(0.5);
-    -webkit-transform-origin: 0 0;
     display: block;
+    width: 100%;
+    max-width: 375px;
+    height: 667px;
+    overflow: hidden;
+    border: #999999 1px solid;
+    margin: 0px;
+    padding: 0px;
 }

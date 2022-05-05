@@ -23,24 +23,27 @@ def results(request):
     if request.method == 'POST':
         destination = request.POST['destination']
         time = request.POST['time']
+
+        if destination == '':
+            context = {
+                'no_location_error': True 
+            }
+            return render(request, 'parking/home.html', context)
+
         if time == 'Now':
             time = datetime.now().strftime("%H:%M")
         
 
         selected_garages = random.sample(GARAGES, 3)
         random.shuffle(selected_garages)
-        # print(selected_garages)
 
-        # context
-        input = {
-                'destination': destination,
-                'time': time
-        }
-        output = selected_garages
 
         context = {
-            'input': input,
-            'output': output,
+            'input': {
+                'destination': destination,
+                'time': time
+            },
+            'output': selected_garages,
         }
         return render(request, 'parking/results.html', context)
     else:

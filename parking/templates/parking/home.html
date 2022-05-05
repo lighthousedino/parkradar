@@ -71,10 +71,17 @@
         </form>
         
 
+        {% if no_location_error %}
+        <div class="block has-text-danger mt-3">
+            Location cannot be empty
+        </div>
+        {% endif %}
+
         <div id="useCurrentLocationWarningNotification" class="block has-text-danger mt-3 is-hidden">
             <!-- <button class="delete"></button> -->
-            Current location is hard-coded for demonstration purpose only.
+            Current location is hard-coded for demonstration purpose only
         </div>
+
     </div>
 </section>
 
@@ -91,8 +98,11 @@
 
     // address autocomplete
     function initialize() {
+        var options = {
+            componentRestrictions: {country: 'uk'}
+        };
         var input = document.getElementById('locationSearchTextField');
-        new google.maps.places.Autocomplete(input);
+        new google.maps.places.Autocomplete(input, options);
     }
     google.maps.event.addDomListener(window, 'load', initialize);
 

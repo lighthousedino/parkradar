@@ -1,0 +1,40 @@
+{% extends "parking/base.html" %}
+{% block head %}
+{% endblock %}
+{% block content %}
+
+<!-- context -->
+
+<section class="section">
+    <div class="container">
+        <h1 class="title is-3 mb-6">Recommendations</h1>
+
+
+        <div class="block">
+            <strong>Closest car parks from: </strong><br>
+            {{ input.destination }}<br>
+        </div>
+        <div class="block">
+            <strong>Available at: </strong>{{ input.time }}<br>
+        </div>
+        {% for garage in output %}
+        <div class="card mb-4">
+            <div class="card-content">
+                <div class="content">
+                    <strong>{{ garage }}</strong><br>
+                    <span class="has-text-grey">Placeholder text</span>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+        <!-- <a href="/direct/" class="button mt-3">
+            <span class="icon">
+              <i class="fas fa-caret-left"></i>
+            </span>
+            <span>Back</span>
+        </a> -->
+    </div>
+    
+</section>
+{% endblock %}

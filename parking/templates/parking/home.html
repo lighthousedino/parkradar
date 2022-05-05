@@ -1,34 +1,71 @@
 {% extends "parking/base.html" %}
+{% block head %}
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBcqvNCEaFN8cgF2_f0038uKWBN038QKYE&v=3.exp&sensor=false&libraries=places"></script>
+{% endblock %}
 {% block content %}
 <section class="section">
     <div class="container">
-        <h1 class="title is-4">Find a parking space</h3>
-        <div class="block">
-            Placeholder
-        </div>
-
-        <div class="mt-6"></div>
-
+        <h1 class="title is-3 mt-6 mb-6">Find a parking space</h3>
+        
         <div class="field">
-            <label class="label">Placeholder</label>
-            <div class="control">
-                <input class="input" type="text" placeholder="placeholder">
+            <label class="label">Where are you driving from?</label>
+            <div class="control">   
+                <button" class="button is-medium is-fullwidth has-text-left">
+                    Use current location
+                </button>
             </div>
         </div>
         <div class="field">
-            <label class="label">Placeholder</label>
-            <div class="control">
-                <input class="input" type="email" placeholder="placeholder">
+            <div class="control has-icons-left">
+                <input id="searchTextField" class="input is-medium" type="text" placeholder="Manual input">
+                <div class="icon is-small is-left">
+                    <i class="fas fa-location-arrow"></i>
+                </div>
             </div>
         </div>
-        <div class="field is-grouped">
-            <div class="control">
-              <button class="button is-success">Search</button>
-            </div>
-            <div class="control">
-                <button class="button is-light">Do something</button>
+        <div class="field mt-4">
+            <label class="label">When do you want to park?</label>
+            <div class="control has-icons-left">
+                <div class="select is-medium is-fullwidth">
+                    <select name="" id="">
+                        <option>Now</option>
+                        <option>00:00</option>
+                        <option>01:00</option>
+                        <option>02:00</option>
+                        <option>03:00</option>
+                        <option>04:00</option>
+                        <option>05:00</option>
+                        <option>06:00</option>
+                        <option>07:00</option>
+                        <option>08:00</option>
+                        <option>09:00</option>
+                        <option>10:00</option>
+                        <option>11:00</option>
+                        <option>12:00</option>
+                        <option>13:00</option>
+                        <option>14:00</option>
+                        <option>15:00</option>
+                        <option>16:00</option>
+                        <option>17:00</option>
+                        <option>18:00</option>
+                        <option>19:00</option>
+                        <option>20:00</option>
+                        <option>21:00</option>
+                        <option>22:00</option>
+                        <option>23:00</option>
+                    </select>
+                </div>
+                <div class="icon is-small is-left">
+                    <i class="fas fa-clock"></i>
+                </div>
             </div>
         </div>
+        <div class="field mt-4">
+            <div class="control">
+                <button class="button is-medium is-fullwidth is-primary">Search</button>
+            </div>
+        </div>
+        
     </div>
 </section>
 
@@ -43,8 +80,8 @@
         </li>
         <li>
             <a>
-            <span class="icon is-small"><i class="fas fa-feather" aria-hidden="true"></i></span>
-            <span>Button</span>
+            <span class="icon is-small"><i class="fas fa-calendar-check" aria-hidden="true"></i></span>
+            <span>Reserve</span>
             </a>
         </li>
         <li>
@@ -54,5 +91,13 @@
             </a>
         </li>
     </ul>
-  </div>
+</div>
+
+<script>
+    function initialize() {
+        var input = document.getElementById('searchTextField');
+        new google.maps.places.Autocomplete(input);
+    }
+    google.maps.event.addDomListener(window, 'load', initialize);
+</script>
 {% endblock %}

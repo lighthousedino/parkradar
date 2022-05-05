@@ -9,11 +9,3 @@
     width: 100%;
  }
 
-.button.has-text-left {
-    justify-content: flex-start;
-
-}
-
-.button.has-text-right {
-    justify-content: flex-end;
-}

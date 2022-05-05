@@ -19,9 +19,9 @@
         </div>
 
         {% for garage in output %}
-        <a href="#" class="button is-fullwidth has-text-left mb-4 pb-6 pt-6 is-large">
+        <a target="_blank" href="https://www.google.com/maps/search/?api=1&query={{ garage }}" class="box is-fullwidth mb-4 is-large">
             <div class="is-size-5 block">
-                <strong>{{ garage }}</strong><span class="icon is-small"><i class="fas fa-caret-right"></i></span><br>
+                <strong>{{ garage }}</strong><span class="icon is-small ml-2"><i class="fas fa-caret-right"></i></span><br>
                 <span class="has-text-grey is-size-6">Placeholder text</span>
             </div>
         </a>

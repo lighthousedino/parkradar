@@ -3,6 +3,10 @@ from django.http import HttpResponse
 from datetime import datetime
 import random
 
+import googlemaps
+gmaps = googlemaps.Client(key='AIzaSyBcqvNCEaFN8cgF2_f0038uKWBN038QKYE')
+
+
 
 GARAGES = [
     'Grand Arcade',
@@ -32,7 +36,8 @@ def results(request):
 
         if time == 'Now':
             time = datetime.now().strftime("%H:%M")
-        
+    
+
 
         selected_garages = random.sample(GARAGES, 3)
         random.shuffle(selected_garages)
@@ -46,5 +51,6 @@ def results(request):
             'output': selected_garages,
         }
         return render(request, 'parking/results.html', context)
+
     else:
-        pass
+        return render(request, 'parking/results.html')

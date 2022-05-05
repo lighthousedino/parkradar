@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'parking.apps.ParkingConfig',
-    'force_mobile.apps.ForceMobileConfig'
+    'mobile.apps.MobileConfig'
 ]
 
 MIDDLEWARE = [

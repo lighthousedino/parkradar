@@ -1,14 +1,19 @@
 {% extends "parking/base.html" %}
+
 {% block head %}
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBcqvNCEaFN8cgF2_f0038uKWBN038QKYE&libraries=places"></script>
 {% endblock %}
+
+
 {% block content %}
+
 <section class="section">
     <div class="container">
-        <h1 class="title is-3 mb-6">Find a parking space</h1>
+        <h1 class="title is-3">Plan ahead</h1>
+        <div class="m-5"></div>
 
 
-        <form action="/direct/results/" method="POST">
+        <form action="{% url 'results' %}" method="POST">
             {% csrf_token %}
             <div class="field">
                 <label class="label">Where are you driving from?</label>
@@ -27,11 +32,29 @@
                 </div>
             </div>
             <div class="field mt-4">
+                <label class="label">Which day do you want to park?</label>
+                <div class="control has-icons-left">
+                    <div class="select is-medium is-fullwidth">
+                        <select name="day" id="">
+                            <option>Monday</option>
+                            <option>Tuesday</option>
+                            <option>Wednesday</option>
+                            <option>Thursday</option>
+                            <option>Friday</option>
+                            <option>Saturday</option>
+                            <option>Sunday</option>
+                        </select>
+                    </div>
+                    <div class="icon is-small is-left">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="field mt-4">
                 <label class="label">When do you want to park?</label>
                 <div class="control has-icons-left">
                     <div class="select is-medium is-fullwidth">
                         <select name="time" id="">
-                            <option>Now</option>
                             <option>00:00</option>
                             <option>01:00</option>
                             <option>02:00</option>
@@ -65,7 +88,7 @@
             </div>
             <div class="field mt-4">
                 <div class="control">
-                    <button type="submit" class="button is-medium is-fullwidth is-primary">Search</button>
+                    <button type="submit" class="button is-medium is-fullwidth is-primary">Get recommendations</button>
                 </div>
             </div>
         </form>
@@ -77,8 +100,7 @@
         </div>
         {% endif %}
 
-        <div id="useCurrentLocationWarningNotification" class="block has-text-danger mt-3 is-hidden">
-            <!-- <button class="delete"></button> -->
+        <div id="useCurrentLocationWarning" class="block has-text-danger mt-3 is-hidden">
             Current location is hard-coded for demonstration purpose only
         </div>
 
@@ -87,14 +109,14 @@
 
 
 <script>
-    const notification1 = document.getElementById("useCurrentLocationWarningNotification");
+    const notification1 = document.getElementById("useCurrentLocationWarning");
     
-    document.getElementById('locationSearchTextField').addEventListener('click', closeNotification1);
-    function closeNotification1() {
-        if (!notification1.classList.contains('is-hidden')) {
-            notification1.classList.add('is-hidden')
-        }
-    }
+    // document.getElementById('locationSearchTextField').addEventListener('click', closeNotification1);
+    // function closeNotification1() {
+    //     if (!notification1.classList.contains('is-hidden')) {
+    //         notification1.classList.add('is-hidden')
+    //     }
+    // }
 
     // address autocomplete
     function initialize() {
@@ -110,25 +132,10 @@
     function getLocation() {
         document.getElementById("locationSearchTextField").value = "Kettle's Yard, Castle Street, Cambridge, UK";
         
-        if (notification1.classList.contains('is-hidden')) {
-            notification1.classList.remove('is-hidden')
-        }
+        // if (notification1.classList.contains('is-hidden')) {
+        //     notification1.classList.remove('is-hidden')
+        // }
     }
-    
-    // get current location
-    // var x = document.getElementById("demo");
-    // function getLocation() {
-    //     if (navigator.geolocation) {
-    //         navigator.geolocation.getCurrentPosition(showPosition);
-    //     } else { 
-    //         x.innerHTML = "Geolocation is not supported by this browser.";
-    //     }
-    // }
-
-    // function showPosition(position) {
-    //     x.innerHTML = "Latitude: " + position.coords.latitude + 
-    //     "<br>Longitude: " + position.coords.longitude;
-    // }
-
 </script>
+
 {% endblock %}

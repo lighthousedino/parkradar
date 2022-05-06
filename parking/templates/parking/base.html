@@ -16,24 +16,21 @@
     {% endblock %}
 
     <!-- nav bar -->
-    <div id="nav-tabs" class="tabs is-fullwidth">
+    <div id="nav-tabs" class="tabs is-fullwidth is-medium">
         <ul>
-            <li class="is-active">
-                <a href="/direct/">
+            <li class="{% if tab_active == 0 %}is-active{% endif %}">
+                <a href="{% url 'now' %}">
                 <span class="icon is-small"><i class="fas fa-car" aria-hidden="true"></i></span>
-                <span>Park</span>
                 </a>
             </li>
-            <li>
-                <a>
+            <li class="{% if tab_active == 1 %}is-active{% endif %}">
+                <a href="{% url 'schedule' %}">
                 <span class="icon is-small"><i class="fas fa-calendar-check" aria-hidden="true"></i></span>
-                <span>Reserve</span>
                 </a>
             </li>
-            <li>
-                <a>
-                <span class="icon is-small"><i class="fas fa-bars" aria-hidden="true"></i></span>
-                <span>Settings</span>
+            <li class="{% if tab_active == 2 %}is-active{% endif %}">
+                <a href="{% url 'settings' %}">
+                <span class="icon is-small"><i class="fas fa-cog" aria-hidden="true"></i></span>
                 </a>
             </li>
         </ul>

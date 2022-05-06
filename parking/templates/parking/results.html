@@ -3,36 +3,31 @@
 {% endblock %}
 {% block content %}
 
-<!-- context -->
-
 <section class="section">
     <div class="container">
-        <h1 class="title is-3 mb-6">Find a parking space</h1>
+        <h1 class="title is-3">Recommendations</h1>
+        <div class="m-5"></div>
 
 
         <div class="block">
-            <strong>Closest to: </strong><br>
-            {{ input.destination }}<br>
-        </div>
-        <div class="block">
-            <strong>Available at: </strong>{{ input.time }}<br>
+            Closest to <span class="has-text-link">{{ destination }}</span> on <span class="has-text-link">{{ day }}</span> at <span class="has-text-link">{{ time }}</span>
         </div>
 
-        {% for garage in output %}
-        <a target="_blank" href="https://www.google.com/maps/search/?api=1&query={{ garage }}" class="box is-fullwidth mb-4 is-large">
+        {% for garage in garages %}
+        <a target="_blank" href="https://www.google.com/maps/search/?api=1&query={{ garage.address }}" class="box is-fullwidth mb-4 is-large">
             <div class="is-size-5 block">
-                <strong>{{ garage }}</strong><span class="icon is-small ml-2"><i class="fas fa-caret-right"></i></span><br>
-                <span class="has-text-grey is-size-6">Placeholder text</span>
+                <strong>{{ garage.name }}</strong><span class="icon is-small ml-2"><i class="fas fa-caret-right"></i></span><br>
+                <span class="has-text-grey is-size-6">5km&ensp;|&ensp;7 minutes</span>
             </div>
         </a>
         {% endfor %}
 
-        <!-- <a href="/direct/" class="button mt-6">
+        <a href="{% url 'schedule' %}" class="button mt-3">
             <span class="icon">
               <i class="fas fa-caret-left"></i>
             </span>
             <span>Back</span>
-        </a> -->
+        </a>
     </div>
     
 </section>

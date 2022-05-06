@@ -60,9 +60,13 @@
                 var marker = new google.maps.Marker({
                     position: results[0].geometry.location,
                     map: map,
+                    icon: {
+                        path: google.maps.SymbolPath.CIRCLE,
+                        scale: 0
+                    },
                     label: {
-                        text: '🏠',
-                        color: 'white',
+                        text: '🚗',
+                        fontSize: "30px"
                     }
                 });
                 bounds.extend(results[0].geometry.location);
@@ -81,9 +85,13 @@
                 var marker = new google.maps.Marker({
                     position: results[0].geometry.location,
                     map: map,
+                    icon: {
+                        path: google.maps.SymbolPath.CIRCLE,
+                        scale: 0
+                    },
                     label: {
-                        // text: 'B',
-                        color: 'white',
+                        text: '🅿️',
+                        fontSize: "25px"
                     }
                 });
                 bounds.extend(results[0].geometry.location);

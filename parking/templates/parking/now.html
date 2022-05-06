@@ -36,86 +36,66 @@
      and consistent behavior across browsers, consider loading using Promises
      with https://www.npmjs.com/package/@googlemaps/js-api-loader.
 -->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBcqvNCEaFN8cgF2_f0038uKWBN038QKYE&callback=initMap&v=weekly" defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBcqvNCEaFN8cgF2_f0038uKWBN038QKYE&callback=initialize" defer></script>
 <script>
-    
-    function initMap() {
-        var geocoder = new google.maps.Geocoder();
-        var location_from_address = "{{ location_from }}";
-        var location_to_address = "{{ first_garage.address }}"
-
-        geocoder.geocode( {'address': location_from_address}, function(results, status) {
-            if (status == google.maps.GeocoderStatus.OK) {
-                var location_from_latitude = results[0].geometry.location.lat();
-                var location_from_longitude = results[0].geometry.location.lng();
-                localStorage.setItem('location_from_latitude', location_from_latitude);
-                localStorage.setItem('location_from_longitude', location_from_longitude);
-            }
-        });
-
-        geocoder.geocode( {'address': location_to_address}, function(results, status) {
-            if (status == google.maps.GeocoderStatus.OK) {
-                var location_to_latitude = results[0].geometry.location.lat();
-                var location_to_longitude = results[0].geometry.location.lng();
-                localStorage.setItem('location_to_latitude', location_to_latitude);
-                localStorage.setItem('location_to_longitude', location_to_longitude);
-            }
-        });
-
-        var location_from = new google.maps.LatLng(
-                localStorage.getItem('location_from_latitude'),
-                localStorage.getItem('location_from_longitude'),
-                ),
-            location_to = new google.maps.LatLng(
-                localStorage.getItem('location_to_latitude'),
-                localStorage.getItem('location_to_longitude'),
-                ),
-            options = {
-                zoom: 15,
-                center: location_from,
-                disableDefaultUI: true,
+    function initialize() {
+        var options = {
+            zoom: 15,
+            disableDefaultUI: true,
+            center: {
+                lat: 0,
+                lng: 0
             },
-            map = new google.maps.Map(document.getElementById('map'), options),
-            // Instantiate a directions service.
-            directionsService = new google.maps.DirectionsService,
-            directionsDisplay = new google.maps.DirectionsRenderer({
-                map: map
-            }),
-            marker_from = new google.maps.Marker({
-                position: location_from,
-                // title: "Current location",
-                // label: "A",
-                map: map
-            }),
-            marker_to = new google.maps.Marker({
-                position: location_to,
-                // title: "Destination",
-                // label: "B",
-                map: map
-            });
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+        };
+        var bounds = new google.maps.LatLngBounds();
+        var map = new google.maps.Map(document.getElementById('map'), options);
 
-        // get route from A to B
-        calculateAndDisplayRoute(directionsService, directionsDisplay, location_from, location_to);
-
-    }
-
-    function calculateAndDisplayRoute(directionsService, directionsDisplay, location_from, location_to) {
-        directionsService.route({
-            origin: location_from,
-            destination: location_to,
-            avoidTolls: true,
-            avoidHighways: false,
-            travelMode: google.maps.TravelMode.DRIVING
-        }, function (response, status) {
-            if (status == google.maps.DirectionsStatus.OK) {
-                directionsDisplay.setDirections(response);
+        var geocoder = new google.maps.Geocoder();
+        var address = "{{ location_from }}";
+        geocoder.geocode({
+            'address': address
+        }, function (results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                var marker = new google.maps.Marker({
+                    position: results[0].geometry.location,
+                    map: map,
+                    label: {
+                        text: '🏠',
+                        color: 'white',
+                    }
+                });
+                bounds.extend(results[0].geometry.location);
+                map.fitBounds(bounds);
             } else {
-                window.alert('Directions request failed due to ' + status);
+                alert("Geocode of " + address + " failed," + status);
+            }
+        });
+
+        var geocoder2 = new google.maps.Geocoder();
+        var address2 = "{{ first_garage.address }}";
+        geocoder2.geocode({
+            'address': address2
+        }, function (results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                var marker = new google.maps.Marker({
+                    position: results[0].geometry.location,
+                    map: map,
+                    label: {
+                        // text: 'B',
+                        color: 'white',
+                    }
+                });
+                bounds.extend(results[0].geometry.location);
+                map.fitBounds(bounds);
+
+            } else {
+                alert("Geocode of " + address2 + " failed," + status);
             }
         });
     }
-
-    window.initMap = initMap;
+    
+    window.initialize = initialize;
 </script>
 
 {% endblock %}

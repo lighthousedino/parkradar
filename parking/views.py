@@ -14,35 +14,35 @@ DEFAULT_LOCATION_FROM = '2044 E Monterey Way, Phoenix'
 REGISTERED_GARAGES = [
     {
         'name': 'Louisa Kellam Center',
-        'address': "14502 W Meeker Blvd, Sun City West"
+        'address': "Louisa Kellam Center Visitor Parking, West Meeker Boulevard, Sun City West"
     },
     {
         'name': 'Encanto Park North',
-        'address': "2499 N 15th Ave, Phoenix"
+        'address': "Encanto Park North Parking Lot, North 15th Avenue, Phoenix"
     },
     {
         'name': 'Luhrs City Center Parking',
-        'address': "181 S 1st Ave, Phoenix"
+        'address': "Luhrs City Center Parking - ParkChirp, South 1st Avenue, Phoenix"
     },
     {
         'name': 'Phoenix Convention Center',
-        'address': "40 N 2nd St, Phoenix"
+        'address': "Phoenix Convention Center - Regency Garage, North 2nd Street, Phoenix"
     },
     {
         'name': 'Jefferson Street Garage',
-        'address': "333 E Jefferson St, Phoenix"
+        'address': "Jefferson Street Garage, East Jefferson Street, Phoenix"
     },
     {
         'name': 'Civic Center Library',
-        'address': "3803 N Drinkwater Blvd, Scottsdale"
+        'address': "Civic Center Library Parking Garage, North Drinkwater Boulevard, Scottsdale"
     },
     {
         'name': 'East Lake View Drive',
-        'address': "E Lake View Dr, Tempe"
+        'address': "East Lake View Drive Parking, East Lake View Drive, Tempe"
     },
     {
         'name': 'Chase Parking Garage',
-        'address': "S Ash Ave, Tempe"
+        'address': "Chase Parking Garage Entrance, South Ash Avenue, Tempe"
     },
 ]
 

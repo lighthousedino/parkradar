@@ -1,33 +1,48 @@
 from django.shortcuts import render
 # from django.http import HttpResponse
 from datetime import datetime
+import calendar
 import random
 
 # import googlemaps
 # gmaps = googlemaps.Client(key='AIzaSyBcqvNCEaFN8cgF2_f0038uKWBN038QKYE')
 
 
+DEFAULT_LOCATION_FROM = '2044 E Monterey Way, Phoenix'
+# DEFAULT_LOCATION_FROM = '2044 E Monterey Way, Phoenix, AZ 85016'
 
-GARAGES = [
+REGISTERED_GARAGES = [
     {
-        'name': 'Grand Arcade',
-        'address': "St Andrew's St, Cambridge CB2 3BJ"
+        'name': 'Louisa Kellam Center',
+        'address': "14502 W Meeker Blvd, Sun City West"
     },
     {
-        'name': 'Grafton East',
-        'address': "East Rd, Cambridge CB1 1PS"
+        'name': 'Encanto Park North',
+        'address': "2499 N 15th Ave, Phoenix"
     },
     {
-        'name': 'Grafton West',
-        'address': "Cambridge CB1 1HE"
+        'name': 'Luhrs City Center Parking',
+        'address': "181 S 1st Ave, Phoenix"
     },
     {
-        'name': 'Park Street',
-        'address': "Park Street, Cambridge"
+        'name': 'Phoenix Convention Center',
+        'address': "40 N 2nd St, Phoenix"
     },
     {
-        'name': 'Queen Annes Terrace',
-        'address': "Gonville Pl, Cambridge CB1 1ND"
+        'name': 'Jefferson Street Garage',
+        'address': "333 E Jefferson St, Phoenix"
+    },
+    {
+        'name': 'Civic Center Library',
+        'address': "3803 N Drinkwater Blvd, Scottsdale"
+    },
+    {
+        'name': 'East Lake View Drive',
+        'address': "E Lake View Dr, Tempe"
+    },
+    {
+        'name': 'Chase Parking Garage',
+        'address': "S Ash Ave, Tempe"
     },
 ]
 
@@ -35,14 +50,21 @@ GARAGES = [
 def recommend_garages(destination, day, time):
     recommendations = []
 
-    garages = random.sample(GARAGES, 3)
+    garages = random.sample(REGISTERED_GARAGES, 3)
     random.shuffle(garages)
-    print(garages)
     return garages
 
 
 def now(request):
+    day = calendar.day_name[datetime.today().weekday()]
+    time = datetime.now().strftime("%H:%M")
+    garages = recommend_garages(DEFAULT_LOCATION_FROM, day, time)
     context = {
+        'location_from': DEFAULT_LOCATION_FROM,
+        'day': day,
+        'time': time,
+        # 'garages': garages,
+        'first_garage': garages[0],
         'tab_active': 0
     }
     return render(request, 'parking/now.html', context)
@@ -50,6 +72,7 @@ def now(request):
 
 def schedule(request):
     context = {
+        'location_from': DEFAULT_LOCATION_FROM,
         'tab_active': 1
     }
     return render(request, 'parking/schedule.html', context)
@@ -57,11 +80,11 @@ def schedule(request):
 
 def results(request):
     if request.method == 'POST':
-        destination = request.POST['destination']
+        location_from = request.POST['location_from']
         day = request.POST['day']
         time = request.POST['time']
 
-        if destination == '':
+        if location_from == '':
             context = {
                 'no_location_error': True 
             }
@@ -70,10 +93,10 @@ def results(request):
         #     time = datetime.now().strftime("%H:%M")
     
         
-        garages = recommend_garages(destination, day, time)
+        garages = recommend_garages(location_from, day, time)
 
         context = {
-            'destination': destination,
+            'location_from': location_from,
             'day': day,
             'time': time,
             'garages': garages,

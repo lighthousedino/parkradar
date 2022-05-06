@@ -25,7 +25,7 @@
             </div>
             <div class="field">
                 <div class="control has-icons-left">
-                    <input name="destination" id="locationSearchTextField" class="input is-medium" type="text" placeholder="Manual input">
+                    <input name="location_from" id="locationSearchTextField" class="input is-medium" type="text" placeholder="Manual input">
                     <div class="icon is-small is-left">
                         <i class="fas fa-location-arrow"></i>
                     </div>
@@ -130,7 +130,7 @@
 
     // hard-coded to fill in UTwente as a workaround without https
     function getLocation() {
-        document.getElementById("locationSearchTextField").value = "Kettle's Yard, Castle Street, Cambridge, UK";
+        document.getElementById("locationSearchTextField").value = "{{ location_from }}";
         
         // if (notification1.classList.contains('is-hidden')) {
         //     notification1.classList.remove('is-hidden')

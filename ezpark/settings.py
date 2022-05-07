@@ -54,7 +54,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'mitigation.urls'
+ROOT_URLCONF = 'ezpark.urls'
 
 TEMPLATES = [
     {
@@ -72,7 +72,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'mitigation.wsgi.application'
+WSGI_APPLICATION = 'ezpark.wsgi.application'
 
 
 # Database

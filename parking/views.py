@@ -1,11 +1,15 @@
+from turtle import distance
 from django.shortcuts import render
 from datetime import datetime
 import calendar
 import random
 from db.queries import Garages, DemoLocation
+import googlemaps
+
+gmaps = googlemaps.Client(key='AIzaSyBcqvNCEaFN8cgF2_f0038uKWBN038QKYE')
 
 
-def recommend_garages(destination, day, time):
+def recommend_garages(location_from, day, time):
     recommendations = []
     all_garages = Garages.get()
 
@@ -13,6 +17,12 @@ def recommend_garages(destination, day, time):
     random.shuffle(random_samples)
 
     for i in random_samples:
+        distance = gmaps.distance_matrix(location_from, i[1]['address'], units='imperial')['rows'][0]['elements'][0]
+        i[1]['estimated_distance'] = distance['distance']['text']
+        i[1]['estimated_time'] = distance['duration']['text']
+
+        i[1]['percentage_occupied'] = round(i[1]['current_occupancy'] / i[1]['max_occupancy'] * 100)
+        
         recommendations.append(i[1])
 
     return recommendations
@@ -27,7 +37,6 @@ def now(request):
         'location_from': location_from,
         'day': day,
         'time': time,
-        # 'garages': garages,
         'first_garage': garages[0],
         'tab_active': 0
     }

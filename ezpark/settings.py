@@ -27,7 +27,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     'localhost',
-    '130.89.162.99',
 ]
 
 
@@ -41,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'parking.apps.ParkingConfig',
-    'mobile.apps.MobileConfig'
+    'mobile.apps.MobileConfig',
+    'db.apps.DbConfig'
 ]
 
 MIDDLEWARE = [

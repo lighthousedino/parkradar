@@ -8,7 +8,12 @@
     width: 100%;
  }
 
- #map {
+#map {
     height: 250px;
     width: 100%;
+}
+
+
+.section {
+    margin-top: -20px;
 }

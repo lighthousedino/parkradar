@@ -54,7 +54,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'ezpark.urls'
+ROOT_URLCONF = 'parkradar.urls'
 
 TEMPLATES = [
     {
@@ -72,7 +72,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'ezpark.wsgi.application'
+WSGI_APPLICATION = 'parkradar.wsgi.application'
 
 
 # Database

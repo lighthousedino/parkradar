@@ -16,7 +16,7 @@
         <form action="{% url 'results' %}" method="POST">
             {% csrf_token %}
             <div class="field">
-                <label class="label">Where are you driving from?</label>
+                <label class="label">Find parking lots close to:</label>
                 <div class="control">   
                     <button" onclick="getLocation()" class="button is-medium is-fullwidth has-text-left">
                         Use current location
@@ -51,7 +51,7 @@
                 </div>
             </div>
             <div class="field mt-4">
-                <label class="label">When do you want to park?</label>
+                <label class="label">What time do you want to park?</label>
                 <div class="control has-icons-left">
                     <div class="select is-medium is-fullwidth">
                         <select name="time" id="">

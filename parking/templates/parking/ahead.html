@@ -88,7 +88,7 @@
             </div>
             <div class="field mt-4">
                 <div class="control">
-                    <button type="submit" class="button is-medium is-fullwidth is-primary">Get recommendations</button>
+                    <button type="submit" class="button is-medium is-fullwidth is-primary loading-modal-trigger" data-target="loading-modal">Get recommendations</button>
                 </div>
             </div>
         </form>
@@ -100,23 +100,11 @@
         </div>
         {% endif %}
 
-        <div id="useCurrentLocationWarning" class="block has-text-danger mt-3 is-hidden">
-            Current location is hard-coded for demonstration purpose only
-        </div>
-
     </div>
 </section>
 
 
 <script>
-    const notification1 = document.getElementById("useCurrentLocationWarning");
-    
-    // document.getElementById('locationSearchTextField').addEventListener('click', closeNotification1);
-    // function closeNotification1() {
-    //     if (!notification1.classList.contains('is-hidden')) {
-    //         notification1.classList.add('is-hidden')
-    //     }
-    // }
 
     // address autocomplete
     function initialize() {
@@ -128,13 +116,11 @@
     }
     google.maps.event.addDomListener(window, 'load', initialize);
 
-    // hard-coded to fill in UTwente as a workaround without https
+    
+    // hard-coded to use the demo location in context as current location
     function getLocation() {
         document.getElementById("locationSearchTextField").value = "{{ location_from }}";
-        
-        // if (notification1.classList.contains('is-hidden')) {
-        //     notification1.classList.remove('is-hidden')
-        // }
+
     }
 </script>
 

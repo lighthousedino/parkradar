@@ -15,22 +15,57 @@
     {% block content %}
     {% endblock %}
 
-    <!-- nav bar -->
+    <!-- bottom navigation bar -->
     <div id="nav-tabs" class="tabs is-fullwidth is-medium">
         <ul>
             <li class="{% if tab_active == 0 %}is-active{% endif %}">
-                <a href="{% url 'now' %}">
+                <a href="{% url 'now' %}" class="loading-modal-trigger" data-target="loading-modal">
                 <span class="icon is-small"><i class="fas fa-car" aria-hidden="true"></i></span>
                 </a>
             </li>
             <li class="{% if tab_active == 1 %}is-active{% endif %}">
-                <a href="{% url 'schedule' %}">
+                <a href="{% url 'ahead' %}" class="loading-modal-trigger" data-target="loading-modal">
                 <span class="icon is-small"><i class="fas fa-calendar-check" aria-hidden="true"></i></span>
                 </a>
             </li>
         </ul>
     </div>
-    
+
+
+    <!-- indeterminate loading modal -->
+    <div id="loading-modal" class="modal">
+        <div class="modal-background"></div>
+        
+        <div class="modal-content">
+            <div class="container m-6">
+                <progress class="progress is-primary" max="100">15%</progress>
+            </div>
+           
+        </div>
+    </div>
+
+    <script>
+        // indeterminate loading modal
+        document.addEventListener('DOMContentLoaded', () => {
+            function openModal($el) {
+                $el.classList.add('is-active');
+            }
+
+            function closeModal($el) {
+                $el.classList.remove('is-active');
+            }
+
+            (document.querySelectorAll('.loading-modal-trigger') || []).forEach(($trigger) => {
+                const modal = $trigger.dataset.target;
+                const $target = document.getElementById(modal);
+
+                $trigger.addEventListener('click', () => {
+                openModal($target);
+                });
+            });
+        });
+    </script>
+
     <script src="https://kit.fontawesome.com/031cc1d6b2.js" crossorigin="anonymous"></script>
 </body>
 </html>

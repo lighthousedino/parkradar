@@ -27,6 +27,7 @@ SECRET_KEY = 'django-insecure-ca@6jmlxg$)y11#=8j4o10b@ojq5=!d6bciik&h6f9f&!dyc0g
 DEBUG = True
 
 ALLOWED_HOSTS = [
+    'https://park-radar.herokuapp.com/',
     'localhost',
 ]
 

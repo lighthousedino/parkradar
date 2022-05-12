@@ -38,7 +38,7 @@ REGISTERED_GARAGES = [
         'name': 'Phoenix Convention Center',
         'address': 'Phoenix Convention Center - Regency Garage, North 2nd Street, Phoenix',
         'max_occupancy': 500,
-        'current_occupancy': 100,
+        'current_occupancy': 350,
         'model': 'carpark 5'
     },
     {

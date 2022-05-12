@@ -1,0 +1,19 @@
+::-webkit-scrollbar {
+    display: none;
+}
+
+#nav-tabs {
+    position: absolute;
+    bottom: -25px;
+    width: 100%;
+ }
+
+#map {
+    height: 250px;
+    width: 100%;
+}
+
+
+.section {
+    margin-top: -15px;
+}

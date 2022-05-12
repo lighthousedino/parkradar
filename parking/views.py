@@ -2,9 +2,12 @@ from django.shortcuts import render
 from datetime import datetime
 import calendar
 import random
-from db.queries import Garages, DemoLocation
 import googlemaps
 import numpy as np
+from garages import registered_garages
+
+REGISTERED_GARAGES = registered_garages.REGISTERED_GARAGES
+DEMO_LOCATION = '2044 E Monterey Way, Phoenix'
 
 gmaps = googlemaps.Client(key='AIzaSyBcqvNCEaFN8cgF2_f0038uKWBN038QKYE')
 
@@ -13,17 +16,17 @@ def recommend_garage_now(location_from):
     '''
     Return the cloest garage whose current occupancy is less than 90%
     '''
-    all_garages = Garages.get()
+    all_garages = REGISTERED_GARAGES.copy()
     rank_distance = []
 
     for i in all_garages:
-        distance = gmaps.distance_matrix(location_from, i[1]['address'], units='imperial')['rows'][0]['elements'][0]
+        distance = gmaps.distance_matrix(location_from, i['address'], units='imperial')['rows'][0]['elements'][0]
         rank_distance.append(distance['distance']['value'])
     
     sorted_indices = np.argsort(rank_distance)
 
     for i in range(len(sorted_indices)):
-        recommendation = all_garages[sorted_indices[i]][1]
+        recommendation = all_garages[sorted_indices[i]]
         distance = gmaps.distance_matrix(location_from, recommendation['address'], units='imperial')['rows'][0]['elements'][0]
         recommendation['estimated_distance'] = distance['distance']['text']
         recommendation['estimated_time'] = distance['duration']['text']
@@ -39,24 +42,24 @@ def recommend_garage_now(location_from):
 
 def recommend_garages(location_from, day, time):
     recommendations = []
-    all_garages = Garages.get()
+    all_garages = REGISTERED_GARAGES.copy()
 
     random_samples = random.sample(all_garages, 3)
     random.shuffle(random_samples)
 
     for i in random_samples:
-        distance = gmaps.distance_matrix(location_from, i[1]['address'], units='imperial')['rows'][0]['elements'][0]
-        i[1]['estimated_distance'] = distance['distance']['text']
-        i[1]['estimated_time'] = distance['duration']['text']
-        i[1]['percentage_occupied'] = round(i[1]['current_occupancy'] / i[1]['max_occupancy'] * 100)
+        distance = gmaps.distance_matrix(location_from, i['address'], units='imperial')['rows'][0]['elements'][0]
+        i['estimated_distance'] = distance['distance']['text']
+        i['estimated_time'] = distance['duration']['text']
+        i['percentage_occupied'] = round(i['current_occupancy'] / i['max_occupancy'] * 100)
         
-        recommendations.append(i[1])
+        recommendations.append(i)
 
     return recommendations
 
 
 def now(request):
-    location_from = DemoLocation.get()
+    location_from = DEMO_LOCATION
     day = calendar.day_name[datetime.today().weekday()]
     time = datetime.now().strftime("%H:%M")
     recommendation = recommend_garage_now(location_from)
@@ -71,7 +74,7 @@ def now(request):
 
 
 def schedule(request):
-    location_from = DemoLocation.get()
+    location_from = DEMO_LOCATION
     context = {
         'location_from': location_from,
         'tab_active': 1

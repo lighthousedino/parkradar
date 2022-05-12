@@ -15,7 +15,7 @@ def now(location_from, day, time):
     rank_distance = []
     for i in garages:
         distance = gmaps.distance_matrix(location_from, i['address'], units='imperial')['rows'][0]['elements'][0]
-        rank_distance.append(distance['distance']['value'])
+        rank_distance.append(distance['duration']['value'])
     sorted_indices = np.argsort(rank_distance)
 
     for i in range(len(sorted_indices)):
@@ -38,7 +38,7 @@ def ahead(location_from, day, time):
     rank_distance = []
     for i in garages:
         distance = gmaps.distance_matrix(location_from, i['address'], units='imperial')['rows'][0]['elements'][0]
-        rank_distance.append(distance['distance']['value'])
+        rank_distance.append(distance['duration']['value'])
     sorted_indices = np.argsort(rank_distance)
     garages = garages[sorted_indices] # sorted list of all garages; closest first
 

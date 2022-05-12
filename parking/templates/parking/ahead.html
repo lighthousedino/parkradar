@@ -19,23 +19,19 @@
             {% csrf_token %}
             <div class="field">
                 <label class="label">Find parking lots close to:</label>
-                <div class="control">   
-                    <button" onclick="getLocation()" class="button is-medium is-fullwidth has-text-left">
-                        Use current location
-                    </button>
-                </div>
             </div>
             <div class="field">
                 <div class="control has-icons-left">
-                    <input name="location_from" id="locationSearchTextField" class="input is-medium" type="text" placeholder="Manual input">
+                    <input name="location_from" id="locationSearchTextField" class="input is-medium" type="text" placeholder="Location">
                     <div class="icon is-small is-left">
                         <i class="fas fa-location-arrow"></i>
                     </div>
                 </div>
+                <p class="help">Leave blank to use your current location</p>
             </div>
             <div class="field mt-4">
                 <label class="label">Which day do you want to park?</label>
-                <div class="control has-icons-left">
+                <div class="control">
                     <div class="select is-medium is-fullwidth">
                         <select name="day" id="">
                             <option>Monday</option>
@@ -47,44 +43,48 @@
                             <option>Sunday</option>
                         </select>
                     </div>
-                    <div class="icon is-small is-left">
-                        <i class="fas fa-calendar"></i>
-                    </div>
                 </div>
             </div>
             <div class="field mt-4">
                 <label class="label">What time do you want to park?</label>
-                <div class="control has-icons-left">
-                    <div class="select is-medium is-fullwidth">
-                        <select name="time" id="">
-                            <option>00:00</option>
-                            <option>01:00</option>
-                            <option>02:00</option>
-                            <option>03:00</option>
-                            <option>04:00</option>
-                            <option>05:00</option>
-                            <option>06:00</option>
-                            <option>07:00</option>
-                            <option>08:00</option>
-                            <option>09:00</option>
-                            <option>10:00</option>
-                            <option>11:00</option>
-                            <option>12:00</option>
-                            <option>13:00</option>
-                            <option>14:00</option>
-                            <option>15:00</option>
-                            <option>16:00</option>
-                            <option>17:00</option>
-                            <option>18:00</option>
-                            <option>19:00</option>
-                            <option>20:00</option>
-                            <option>21:00</option>
-                            <option>22:00</option>
-                            <option>23:00</option>
+                <div class="control">
+                    <div class="select is-medium">
+                        <select name="hour" id="">
+                            <option>00</option>
+                            <option>01</option>
+                            <option>02</option>
+                            <option>03</option>
+                            <option>04</option>
+                            <option>05</option>
+                            <option>06</option>
+                            <option>07</option>
+                            <option>08</option>
+                            <option>09</option>
+                            <option>10</option>
+                            <option>11</option>
+                            <option>12</option>
+                            <option>13</option>
+                            <option>14</option>
+                            <option>15</option>
+                            <option>16</option>
+                            <option>17</option>
+                            <option>18</option>
+                            <option>19</option>
+                            <option>20</option>
+                            <option>21</option>
+                            <option>22</option>
+                            <option>23</option>
                         </select>
                     </div>
-                    <div class="icon is-small is-left">
-                        <i class="fas fa-clock"></i>
+                    
+                    <span class="is-size-3 mr-3 ml-3"><strong>:</strong></span>
+                    <div class="select is-medium">
+                        <select name="minute" id="">
+                            <option>00</option>
+                            <option>15</option>
+                            <option>30</option>
+                            <option>45</option>
+                        </select>
                     </div>
                 </div>
             </div>
@@ -94,14 +94,6 @@
                 </div>
             </div>
         </form>
-        
-
-        {% if no_location_error %}
-        <div class="block has-text-danger mt-3">
-            Location cannot be empty
-        </div>
-        {% endif %}
-
     </div>
 </section>
 
@@ -120,10 +112,10 @@
 
     
     // hard-coded to use the demo location in context as current location
-    function getLocation() {
-        document.getElementById("locationSearchTextField").value = "{{ location_from }}";
+    // function getLocation() {
+    //     document.getElementById("locationSearchTextField").value = "{{ location_from }}";
 
-    }
+    // }
 </script>
 
 {% endblock %}

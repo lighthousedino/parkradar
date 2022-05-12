@@ -35,13 +35,10 @@ def results(request):
     if request.method == 'POST':
         location_from = request.POST['location_from']
         day = request.POST['day']
-        time = request.POST['time']
+        time = f'{request.POST["hour"]}:{request.POST["minute"]}'
 
         if location_from == '':
-            context = {
-                'no_location_error': True 
-            }
-            return render(request, 'parking/ahead.html', context)
+            location_from = DEMO_LOCATION
         
         recommendations = recommend.ahead(location_from, day, time)
         

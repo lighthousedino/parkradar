@@ -32,7 +32,7 @@ def predict_occupancy(garage_name, day, time):
         input_time -= 24
         input_day += 1
         if input_day > 6:
-            input_day == 0
+            input_day = 0
 
     input = np.array([
         input_day,

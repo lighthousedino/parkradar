@@ -28,7 +28,7 @@ def now(location_from, day, time):
         recommendation['estimated_time'] = distance['duration']['text']
 
         # use prediction value instead of sensor value if the travel duration is longer thann 15 mins
-        if distance['distance']['value'] > 900:
+        if distance['duration']['value'] > 900:
             recommendation['percentage_occupied'] = round(predict_occupancy(recommendation['name'], day, time) * 100)
         else:
             recommendation['percentage_occupied'] = round(simulate_sensors(recommendation['name'], day, time) * 100)

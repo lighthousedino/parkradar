@@ -1,8 +1,0 @@
-import numpy as np
-import googlemaps
-from garages import registered_garages
-from garages.predict import predict_occupancy, simulate_sensors
-
-
-def predict(num_iters):
-
